@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-	@await Html.PartialAsync("_MetaPartial");
-	@await Html.PartialAsync("_CssPartial");
+	@await Html.PartialAsync("_MetaPartial")
+	@await Html.PartialAsync("_CssPartial")
 </head>
 <body class="left-sidebar is-preload">
 	<div id="page-wrapper">
-		@await Html.PartialAsync("_HeaderPartial");
+		@await Html.PartialAsync("_HeaderPartial")
 
 		<!-- Main Wrapper -->
 		<div id="main-wrapper">
@@ -15,18 +15,18 @@
 					<div class="container">
 						<div class="row">
 
-							@RenderBody();
+							@RenderBody()
 						</div>
 					</div>
 				</div>
 			</div>
 
-			@await Html.PartialAsync("_RecentPartial");
+			@await Html.PartialAsync("_RecentPartial")
 		</div>
 
-		@await Html.PartialAsync("_FooterPartial");
+		@await Html.PartialAsync("_FooterPartial")
 	</div>
 
-	@await Html.PartialAsync("_ScriptsPartial");
+	@await Html.PartialAsync("_ScriptsPartial")
 </body>
 </html>
