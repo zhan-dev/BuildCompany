@@ -27,11 +27,10 @@ namespace BuildCompany.Controllers.Admin
         public async Task<string> SaveImg(IFormFile img)
         {
             string path = Path.Combine(_hostingEnvironment.WebRootPath, "images/", img.FileName);
-            await using (FileStream stream = new FileStream(path, FileMode.Create))
-            {
+            await using FileStream stream = new FileStream(path, FileMode.Create);
                 await img.CopyToAsync(stream);
+
                 return path;
-            }
         }
 
         public async Task<string> SaveEditorImg()
