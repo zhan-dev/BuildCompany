@@ -1,0 +1,76 @@
+﻿@model Service
+@{
+    string strTitle = "Редактировать запись";
+    ViewBag.Title = strTitle;
+}
+<style>
+    button {
+        color: black !important;
+    }
+</style>
+<script src="https://cdn.tiny.cloud/1/ztyvo96681sgcad05uykv22xf9jrfam9i6pih0dknqyvfvg8/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<div>
+    <h2>@strTitle</h2>
+    <form asp-area="" asp-controller="Admin" asp-action="ServiceEdit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="DateCreated" />
+        <input type="hidden" asp-for="Photo" />
+
+        <div asp-validation-summary="All">
+            <div class="div-box">
+                <select asp-for="ServiceCategoryId">
+                    <option value="value">...выберите из списка...</option>
+                    @foreach(ServiceCategory entity in ViewBag.ServiceCategories)
+                    {
+                        <option value="@entity.Id">@entity.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="ServiceCategoryId"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" />
+                <span asp-validation-for="Title"></span>
+           </div>
+           <div>
+                <label asp-for="Type"></label>
+                <select asp-for="Type" asp-items="@Html.GetEnumSelectList<ServiceTypeEnum>()"> </select>
+                <span asp-validation-for="Type"></span>
+           </div>
+            <div class="div-box">
+                <label asp-for="DescriptionShort"></label>
+                <input asp-for="DescriptionShort" />
+                <span asp-validation-for="DescriptionShort"></span>
+           </div>
+            <div class="div-box">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="tinymce-editor"></textarea>
+                <span asp-validation-for="Description"></span>
+           </div>
+           <div class="div-box">
+                <label asp-for="Photo"></label>
+                <input type="file" name="titleImageFile" id="titleImageFile" />
+                <div>
+                    <img class="img-block" src="~/images/@Model.Photo" alt="" />
+                </div>
+           </div>
+           <input type="submit" value="Сохранить" />
+        </div>
+    </form>
+</div>
+
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      language: 'ru',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+      automatic_uploads: true,
+      images_upload_url: '/admin/SaveEditorImg',
+      images_reuse_filename: true,
+      image_dimensions: false,
+      paste_data_images: true,
+      convert_urls: false
+    });
+</script>
